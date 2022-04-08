@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prototype Webmap Rennes 1</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5">
+  <meta charset="utf-8" />
+
+  <link rel="stylesheet" href="assets/css/CSS.css"/>
+  <link rel="stylesheet" href="assets/css/autoComplete.css"/>
+  <link href='https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.css' rel='stylesheet' />
+
+</head>
+
+<body>
+
+  <div id="map"></div>
+  <div id="logo">
+    <a href="https://www.univ-rennes1.fr/" target="_blank">
+      <img src="icons/map-icons/CartoucheHaut_Rouge.svg" alt="Rennes 1" style="width: 100%; height: 100%;">
+    </a>
+  </div>
+  <div id="menu">
+    <div class="search-ctrl">
+      <input id="autoComplete" autocomplete="off">
+      <div id="layerbutton" class="icons" >
+        <div class="svg">
+          <img src="icons/map-icons/layers.svg" alt="Couches" style="width: 100%; height: 100%;">
+        </div>
+      </div>
+    </div>
+    <div id="layers-menu"></div>
+    <div id="attribution">
+      <span style="font-size:0.8rem;"><a href="https://esigat.wordpress.com/" target="_blank">@Master SIGAT</a> | <a href="https://maplibre.org/" target="_blank">@Maplibre</a></span>
+    </div>
+    <div id="layerclear" class="clear">
+      <div class="svg">
+        <img src="icons/map-icons/clear.svg" alt="Couches" style="width: 100%; height: 100%;">
+      </div>
+    </div>
+  </div>
+  <div class="map-ctrl">
+    <div id="switch" class="icons">
+      <span id="state" class="txt"></span>
+    </div>
+  </div>
+
+  <script src='https://unpkg.com/maplibre-gl@2.1.7/dist/maplibre-gl.js' ></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+  <script src="assets/js/CSS.js"async></script>
+  <script src="assets/js/autoComplete.min.js"></script>
+</body>
+</html>
