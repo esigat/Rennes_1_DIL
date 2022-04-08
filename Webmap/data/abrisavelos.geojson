@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "abris_a_velos",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "nom": "A", "batiment": "5-6", "nombre": 2, "securise": "Non", "nb_places": 72, "existant": "Non", "source": "PDF", "info2": "72 places", "info3": "Abri non sécurisé" }, "geometry": { "type": "Point", "coordinates": [ -1.635779554715518, 48.116682484463155 ] } },
+{ "type": "Feature", "properties": { "id": 2, "nom": "B", "batiment": "40", "nombre": 2, "securise": "Non", "nb_places": 64, "existant": "Non", "source": "PDF", "info2": "64 places", "info3": "Abri non sécurisé" }, "geometry": { "type": "Point", "coordinates": [ -1.635961312456469, 48.118633700107367 ] } },
+{ "type": "Feature", "properties": { "id": 3, "nom": "C", "batiment": "27", "nombre": 1, "securise": "Non", "nb_places": 50, "existant": "Oui", "source": "PDF", "info2": "50 places", "info3": "Abri non sécurisé" }, "geometry": { "type": "Point", "coordinates": [ -1.640950380068381, 48.119902196655282 ] } },
+{ "type": "Feature", "properties": { "id": 4, "nom": "D", "batiment": "10a, 10b, 10c", "nombre": 1, "securise": "Oui", "nb_places": 36, "existant": "Non", "source": "PDF", "info2": "36 places", "info3": "Abri sécurisé" }, "geometry": { "type": "Point", "coordinates": [ -1.640024585908208, 48.115830207095719 ] } },
+{ "type": "Feature", "properties": { "id": 5, "nom": "E", "batiment": "11a, 11b, 11c, 11d, 11e", "nombre": 1, "securise": "Oui", "nb_places": 36, "existant": "Non", "source": "PDF", "info2": "36 places", "info3": "Abri sécurisé" }, "geometry": { "type": "Point", "coordinates": [ -1.640246944695471, 48.117236933783254 ] } },
+{ "type": "Feature", "properties": { "id": 6, "nom": "G", "batiment": "36", "nombre": 1, "securise": "Non", "nb_places": 36, "existant": "Non", "source": "PDF", "info2": "36 places", "info3": "Abri non sécurisé" }, "geometry": { "type": "Point", "coordinates": [ -1.643325711028073, 48.117799555540259 ] } },
+{ "type": "Feature", "properties": { "id": 7, "nom": "H", "batiment": "1a", "nombre": 1, "securise": "Non", "nb_places": 36, "existant": "Non", "source": "PDF", "info2": "36 places", "info3": "Abri non sécurisé" }, "geometry": { "type": "Point", "coordinates": [ -1.636941395178033, 48.114954739476218 ] } },
+{ "type": "Feature", "properties": { "id": 8, "nom": "J", "batiment": "35", "nombre": 1, "securise": "Non", "nb_places": 36, "existant": "Non", "source": "PDF", "info2": "36 places", "info3": "Abri non sécurisé" }, "geometry": { "type": "Point", "coordinates": [ -1.645161234216207, 48.118886594175244 ] } },
+{ "type": "Feature", "properties": { "id": 9, "nom": "N", "batiment": "15", "nombre": 1, "securise": "Non", "nb_places": 36, "existant": "Non", "source": "PDF", "info2": "36 places", "info3": "Abri non sécurisé" }, "geometry": { "type": "Point", "coordinates": [ -1.637498154410804, 48.117667405030552 ] } }
+]
+}
