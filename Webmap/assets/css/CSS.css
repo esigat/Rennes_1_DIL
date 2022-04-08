@@ -1,0 +1,365 @@
+/* Paramètres globaux */
+html {
+  font: 14px 'Open-Sans', sans-serif;
+  margin:0;
+  padding:0;
+}
+
+body {
+  margin: 0;
+}
+
+/* Définition de l'objet carte */
+#map {
+  position:absolute;
+  top:0;
+  bottom:0;
+  height: 100%;
+  width:100%;
+  z-index: 0;
+}
+
+.maplibregl-ctrl .maplibregl-ctrl-attrib .mapboxgl-ctrl .mapboxgl-ctrl-attrib .maplibregl-compact .mapboxgl-compact .maplibregl-compact-show .mapboxgl-compact-show {
+  visibility: hidden;
+}
+
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib, .maplibregl-ctrl.maplibregl-ctrl-attrib {
+  display: none;
+}
+
+.maplibregl-popup-tip,.mapboxgl-popup-tip {
+  display: none;
+}
+
+.maplibregl-popup-content,.maplibregl-popup-content {
+  color: #332823;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 10px;
+  max-height: 240px;
+  overflow-y:auto;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, .8);
+  border-left: 2px solid #332823;
+  border-right: 2px solid #332823;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.maplibregl-popup-content .nom {
+  font-weight: 800;
+  font-size: 1.5rem;
+  margin: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.maplibregl-popup-content .valeur {
+  margin: 0;
+  margin-bottom: 0.2rem;
+  font-size: 1.25rem;
+}
+.maplibregl-popup-content .message {
+  margin: 0;
+  margin-bottom: 0.2em;
+  font-size: 1rem;
+}
+.maplibregl-popup-content a:link {
+  margin: 0;
+  margin-bottom: 0.2em;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.maplibregl-popup-content a:hover {
+  margin: 0;
+  margin-bottom: 0.2em;
+  font-size: 0.85rem;
+  text-decoration: underline;
+}
+
+.icons.marker {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 2rem;
+  box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Définition des styles de pictogrammes */
+.icons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 2rem;
+  background: #fff;
+  border-radius: 100px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.icons:active {
+  background: #ccc;
+}
+
+.svg {
+  position: relative;
+  height: 65%;
+  width: 65%;
+}
+
+.icons .txt {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align:center;
+  font-size:14px;
+  font-weight: 600;
+}
+
+/* Définition des boutons de contrôle de carte */
+.map-ctrl {
+  position : absolute;
+  right: 10px;
+  top : 78px;
+}
+
+.map-ctrl .icons {
+  height: 29px;
+  width: 29px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px rgb(0 0 0 / 10%);
+  margin-top: 10px;
+}
+
+/* Définition de la cartouche Rennes 1 */
+#logo {
+  position: absolute;
+  left: 1rem;
+  height: 6rem;
+  width: 6rem;
+}
+
+/* Définition du menu de recherche et de gestion de couche */
+#menu {
+  position: fixed;
+  display: block;
+  background: #332823;
+  bottom: calc(-65vh + 5rem);
+  height: 65vh;
+  width: 100%;
+  z-index: 1;
+  will-change: transform;
+}
+
+  /* Paramètres de l'animation du menu de recherche et de gestion de couche */
+.slideIn {
+  animation : menuSlide .7s 1;
+  animation-fill-mode: forwards;
+}
+
+.slideOut {
+  animation: menuSlideOut .5s 1;
+}
+
+@keyframes menuSlide {
+  from {
+    transform: translateY(0px);
+    transition-timing-function: ease-in;
+  }
+  to {
+    transform: translateY(calc(-65vh + 5rem));
+    transition-timing-function: ease-out;
+  }
+}
+
+@keyframes menuSlideOut {
+  from {
+    transform: translateY(calc(-65vh + 5rem));
+    transition-timing-function: ease-in;
+  }
+  to {
+    transform: translateY(0px);
+    transition-timing-function: ease-out;
+  }
+}
+
+/* Définition de la barre de recherche */
+.search-ctrl {
+  position: absolute;
+  display: flex;
+  top: 0;
+  padding: 1rem 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.search-ctrl .icons {
+  width: 3rem;
+  height: 3rem;
+  margin-left: 1rem;
+}
+
+/* Paramètres de l'input texte de la barre de recherche */
+.search-ctrl input[type='text'] {
+  display: block;
+  background-color: #fff;
+  font-size: 1rem;
+  line-height: 1rem;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 1rem 2rem;
+  margin-left: 1rem;
+  border-radius: 100px;
+  border: none;
+  width: calc(100% - 10rem);
+}
+
+/* Définition de l'encart recevant les couches */
+#layers-menu {
+  display: block;
+  position: absolute;
+  top:5rem;
+  bottom: 4rem;
+  left: 1rem;
+  height: auto;
+  width: calc(100% - 6rem);
+  overflow-y: scroll;
+}
+
+#menu .clear {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 100px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  top : 5rem;
+  height: 3rem;
+  width: 3rem;
+  right: 1rem;
+}
+
+#menu .clear:active {
+  background: #ccc;
+}
+
+#attribution {
+  position: absolute;
+  display: flex;
+  color: #fff;
+  justify-content: left;
+  align-items: center;
+  bottom: 0;
+  left: 1rem;
+  height: 2rem;
+  width: calc(100% - 6rem)
+}
+
+#attribution a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Paramètres des objets destinés à recevoir les informations des thématiques */
+.theme {
+  font-size: 2rem;
+  font-weight: 700;
+  padding-bottom: 1rem;
+  color: #fff;
+}
+
+/* Paramètres des objets destinés à recevoir les pictogrammes et les titres des couches */
+.layers-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+/* Paramètres des objets destinés à recevoir le pictogramme et le titre d'une couche */
+.couche {
+  display: block;
+  width: 5rem;
+  margin-top : 1rem;
+  margin-right: 1rem;
+}
+
+/* Paramètres de l'emprise d'un pictogramme */
+.couche .rectangle {
+  will-change: transform;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 20px;
+  z-index: 100;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.couche .rectangle .border {
+  z-index: 10;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 18px;
+}
+
+/* Paramètres du nom de la couche */
+.couche .nom {
+  font-size: 0.75rem;
+  font-weight: 300;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Paramètres à modifier selon la taille de l'écran d'affichage */
+@media only screen and (min-width : 769px) {
+  #menu {
+    width: 50%;
+    border-top-right-radius: 20px;
+  }
+}
+
+@media only screen and (min-width : 1025px) {
+  #menu {
+    width: 30%;
+  }
+  html {
+    font-size: 14px;
+  }
+  #logo {
+    height: 8rem;
+    width: 8rem;
+  }
+}
