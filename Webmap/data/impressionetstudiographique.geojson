@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "impressionetstudiographique",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "info1": "Service de reprographie", "info2": "L’accueil est ouvert de 8h15 à 12h et de 13h à 16h45", "info3": "N° téléphone\n02 23 23 63 15", "URL": "https:\/\/www.univ-rennes1.fr\/interlocuteurs\/service-de-reprographie" }, "geometry": { "type": "Point", "coordinates": [ -1.637128969624262, 48.115631215922335 ] } }
+]
+}
