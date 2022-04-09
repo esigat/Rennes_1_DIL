@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "cafeterias",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "nom": "Étoile", "horaires": "11h30 - 14h", "prop": "CROUS", "info_1": "Cafet' Etoile", "info_2": "Ouvert de 11h30  à 14h", "url": "https:\/\/www.crous-rennes.fr\/restaurant\/cafet-etoile\/" }, "geometry": { "type": "Point", "coordinates": [ -1.640244549187463, 48.122804502524168 ] } },
+{ "type": "Feature", "properties": { "id": 2, "nom": "Astrolabe", "horaires": "9h - 18h (14h le vendredi)", "prop": "CROUS", "info_1": "Cafet' Astrolabe", "info_2": "Ouvert de 9h à 18h (14h le vendredi)", "url": "https:\/\/www.crous-rennes.fr\/restaurant\/cafet-astrolabe\/" }, "geometry": { "type": "Point", "coordinates": [ -1.635859019529226, 48.118417514134158 ] } },
+{ "type": "Feature", "properties": { "id": 3, "nom": "SGDA", "horaires": "7h - 16h30 (14h30 le vendredi)", "prop": null, "info_1": "Cafétéria SGDA", "info_2": "Ouvert de 7h à 16h30 (14h30 le vendredi)", "url": "https:\/\/cafetcampus.kenevi.com\/" }, "geometry": { "type": "Point", "coordinates": [ -1.641097729284144, 48.119923789594758 ] } },
+{ "type": "Feature", "properties": { "id": 4, "nom": "ISTIC", "horaires": "7h30 - 16h45", "prop": null, "info_1": "Cafétéria ISTIC", "info_2": "Ouvert de 7h30  à 16h45", "url": "https:\/\/istic.univ-rennes1.fr\/informations" }, "geometry": { "type": "Point", "coordinates": [ -1.638496324440571, 48.115648613212358 ] } },
+{ "type": "Feature", "properties": { "id": 5, "nom": "Diapason", "horaires": "9h - 17h", "prop": null, "info_1": "Cafétéria du Diapason", "info_2": "Ouvert de 9h  à 17h", "url": "https:\/\/diapason.univ-rennes1.fr\/informations-pratiques" }, "geometry": { "type": "Point", "coordinates": [ -1.643846186962037, 48.117916400839711 ] } }
+]
+}
