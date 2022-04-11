@@ -5,7 +5,7 @@ const couches =
 {
   "Restauration" :
   [
-    ["Restaurants Universitaires", "Cafétarias", "Food truck", "Tables de pique-nique", "Machines à café"],
+    ["Restaurants Universitaires", "Cafétérias", "Food truck", "Tables de pique-nique"],
     "#e03c31",
     {
 
@@ -24,7 +24,7 @@ const couches =
     ["Parkings", "Parkings PMR", "Parkings à vélos", "Abris à vélos", "Travaux"],
     "#2b4794",
     {
-      "Métros" : "https://data.explore.star.fr/api/records/1.0/search/?dataset=tco-metro-topologie-stations-td&q=&rows=100&facet=id&facet=codeinseecommune&facet=nomcommune&facet=codetechniquestationlignea&format=geojson",
+      "Métros" : "https://data.explore.star.fr/api/records/1.0/search/?dataset=tco-metro-topologie-stations-td&q=&rows=28&sort=nom&facet=id&facet=codeinseecommune&facet=nomcommune&facet=codetechniquestationlignea&facet=codetechniquestationligneb&format=geojson",
       "Bus" : "https://data.explore.star.fr/api/records/1.0/search/?dataset=tco-bus-topologie-pointsarret-td&q=code%3A%221609%22+OR+code%3A%221160%22+OR+code%3A%221610%22+OR+code%3A%221175%22+OR+code%3A%221312%22+OR+code%3A%221176%22+OR+code%3A%221204%22+OR+code%3A%221203%22+OR+code%3A%221177%22+OR+code%3A%221313%22+OR+code%3A%221292%22+OR+code%3A%221202%22+OR+code%3A%221178%22+OR+code%3A%221604%22+OR+code%3A%221603%22+OR+code%3A%229217%22+OR+code%3A%221291%22+OR+code%3A%221314%22+OR+code%3A%221687%22+OR+code%3A%221688%22+OR+code%3A%221522%22+OR+code%3A%221528%22+OR+code%3A%221201%22+OR+code%3A%221432%22&rows=100&sort=nom&facet=nom&facet=codeinseecommune&facet=nomcommune&facet=estaccessiblepmr&facet=mobilier&facet=code&format=geojson",
       "VLS" : "https://data.explore.star.fr/api/records/1.0/search/?dataset=vls-stations-etat-tr&q=&rows=60&facet=nom&facet=etat&facet=nombreemplacementsactuels&facet=nombreemplacementsdisponibles&facet=nombrevelosdisponibles&format=geojson",
       "Parcs relais" : "https://data.explore.star.fr/api/records/1.0/search/?dataset=tco-parcsrelais-star-etat-tr&q=nom%3A%27Les+Pr%C3%A9ales%27&facet=idparc&facet=nom&facet=etatouverture&facet=etatremplissage%E2%80%A2&format=geojson"
@@ -222,7 +222,7 @@ var map = new maplibregl.Map(
 {
   container: 'map',
   style:'https://api.maptiler.com/maps/basic/style.json?key=PQt7vayjzhEbrIotg7qI',
-  bounds:[[-1.645557606767821, 48.11380355348846], [-1.631991647585447, 48.12536965207949]],
+  bounds:[[-1.648558, 48.113804], [-1.625402, 48.127114]],
   DoubleClickZoomHandler: true,
   antialias : true,
   maxPitch:0,
@@ -237,7 +237,7 @@ map.on("load", function()
     'source' :
     {
       'type' : 'geojson',
-      'data' : 'https://raw.githubusercontent.com/TmMnt/AMS/main/RM_bati_beaulieu.geojson'
+      'data' : 'https://raw.githubusercontent.com/esigat/Rennes_1_DIL/main/Webmap/data/bati_beaulieu_3D.geojson'
     },
     'layout' :
     {
@@ -245,16 +245,21 @@ map.on("load", function()
     },
     'paint':
     {
-      'fill-extrusion-color': '#565656',
+      'fill-extrusion-color': [
+        'match',
+        ['get', 'zone'],
+        'Campus de Beaulieu', '#565656',
+        '#A9A9A9'
+      ],
       'fill-extrusion-height': 0,
-      'fill-extrusion-opacity': 0.90,
+      'fill-extrusion-opacity': 0.9,
       'fill-extrusion-base': 0
     }
   });
 
   map.addSource('batiments-labels-layer', {
     'type' : 'geojson',
-    'data' : 'https://raw.githubusercontent.com/TmMnt/AMS/main/RM_bati_beaulieu_labels.geojson'
+    'data' : 'https://raw.githubusercontent.com/esigat/Rennes_1_DIL/main/Webmap/data/bati_beaulieu_labels.geojson'
   });;
 
   map.addLayer({
@@ -286,6 +291,44 @@ map.on("load", function()
         1
       ]
     }
+  });
+
+  map.addSource('zones-labels-layer', {
+    'type' : 'geojson',
+    'data' : 'https://raw.githubusercontent.com/esigat/Rennes_1_DIL/main/Webmap/data/bati_beaulieu_zones.geojson'
+  });
+
+  map.addLayer({
+    'id':'zones-labels-layer',
+    'type' : 'symbol',
+    'source' : 'zones-labels-layer',
+    'maxzoom' : 16,
+    'layout' :
+    {
+      'visibility' : 'visible',
+      'text-field' : '{zone}',
+      'text-allow-overlap': true,
+      'text-font' : ['Open Sans Bold'],
+      'text-size' : 16,
+      'text-anchor' : 'center'
+    },
+    'paint':
+    {
+      'text-color' : [
+        'match',
+        ['get', 'zone'],
+        'Campus de Beaulieu', '#565656',
+        '#A9A9A9'
+      ],
+      'text-halo-color' : '#fff',
+      'text-halo-width' : 1,
+      'text-opacity' : 1
+    }
+  });
+
+  map.addSource('bati-beaulieu-usages-layer', {
+    'type' : 'geojson',
+    'data' : 'https://raw.githubusercontent.com/esigat/Rennes_1_DIL/main/Webmap/data/bati_beaulieu_usages.geojson'
   });
 
   file = 'https://data.explore.star.fr/api/records/1.0/search/?dataset=tco-metro-topologie-parcours-td&q=senscommercial%3A%27Retour%27&facet=nomcourtligne&facet=senscommercial&facet=type&facet=nomarretdepart&facet=nomarretarrivee&facet=estaccessiblepmr&format=geojson';
@@ -373,7 +416,7 @@ map.on("load", function()
             map.addSource(removeAccents(couche).toLowerCase().replace(/\s+/g, ''),
             {
               type:'geojson',
-              data: chercher('https://raw.githubusercontent.com/TmMnt/AMS/main/', couche + '.geojson'),
+              data: chercher('https://raw.githubusercontent.com/esigat/Rennes_1_DIL/main/Webmap/data/', couche + '.geojson'),
               cluster:true,
               clusterMaxZoom: 16
             });
@@ -471,6 +514,7 @@ map.on("load", function()
 
 if(window.matchMedia("(min-width:1025px)").matches) {
   var popup = new maplibregl.Popup({
+    className: 'poi',
     closeButton: false,
     closeOnClick: true,
     offset : 42,
@@ -478,7 +522,6 @@ if(window.matchMedia("(min-width:1025px)").matches) {
     anchor: 'bottom'
   });
   var popup_bat = new maplibregl.Popup({
-    className: 'bat',
     closeButton: false,
     closeOnClick: true,
     offset: 0,
@@ -487,6 +530,7 @@ if(window.matchMedia("(min-width:1025px)").matches) {
   });
 } else {
   var popup = new maplibregl.Popup({
+    className: 'poi',
     closeButton: false,
     closeOnClick: true,
     offset : 30,
@@ -505,13 +549,14 @@ if(window.matchMedia("(min-width:1025px)").matches) {
 
 // Interaction couche
 const layers = []
-
+console.log(layers);
 $(".rectangle").click(function(event)
 {
   id = '#' + event.currentTarget.id;
   border = '#' + event.currentTarget.id.replace('_icon', '_border');
   clickedLayer = event.currentTarget.id.split("_");
   clickedSource = clickedLayer[1];
+  console.log(clickedSource);
   clickedLayerUnclustered = clickedLayer[1] + '-layer-unclustered';
   clickedLayer = clickedLayer[1] + '-layer';
   theme = event.currentTarget.id.split("_")[0];
@@ -568,9 +613,17 @@ $(".rectangle").click(function(event)
           map.easeTo({
             center: e.features[0].geometry.coordinates,
           });
-          var description =
-          '<div class="nom">' +  e.features[0].properties.nom + '</div>' +
-          '<a href=https://www.star.fr/ target=_blank>STAR</a>'
+          var description = '<div class="nom">' +  e.features[0].properties.nom + '</div>'
+          if (e.features[0].properties.codetechniquestationlignea == undefined) {
+            description += '<div class="valeur">Ligne b</div>'
+          }
+          if (e.features[0].properties.codetechniquestationligneb == undefined) {
+            description += '<div class="valeur">Ligne a</div>'
+          }
+          if (e.features[0].properties.codetechniquestationligneb != undefined && e.features[0].properties.codetechniquestationlignea != undefined) {
+            description += '<div class="valeur">Ligne a et b</div>'
+          }
+          description += '<a href=https://www.star.fr/ target=_blank>STAR</a>'
           popup.setLngLat(e.features[0].geometry.coordinates).setHTML(description).addTo(map);
         });
       });
@@ -660,10 +713,10 @@ $(".rectangle").click(function(event)
       );
       break;
       case 'evenements-layer' :
-      map.moveLayer(clickedLayer);
+      map.moveLayer('evenements-layer');
 
-      layers.push(clickedLayer);
-      layers.push(clickedLayerUnclustered);
+      layers.push('evenements-layer');
+      layers.push('evenements-layer-unclustered');
 
       var color = couches_abr[theme][1];
 
@@ -671,33 +724,40 @@ $(".rectangle").click(function(event)
 
       map.setLayoutProperty
       (
-        clickedLayer,
+        'evenements-layer',
         'visibility',
         'visible'
       );
       map.setLayoutProperty
       (
-        clickedLayerUnclustered,
+        'evenements-layer-unclustered',
         'visibility',
         'visible'
       );
 
-      map.on('mouseenter', clickedLayer, (e) => {
+      map.on('mouseenter', 'evenements-layer', (e) => {
         map.getCanvas().style.cursor = 'pointer';
-        map.on('click', clickedLayer, (e) => {
+        map.on('click', 'evenements-layer', (e) => {
           var features = map.queryRenderedFeatures(e.point, {
-            layers: [clickedLayer]
+            layers: ['evenements-layer']
           });
           var clusterId = features[0].properties.cluster_id;
           var pointCount = features[0].properties.point_count;
-          map.getSource(clickedSource).getClusterChildren(clusterId, function(error, features) {
-            console.log(features);
+          map.getSource('evenements').getClusterChildren(clusterId, function(error, features) {
+            cluster =[];
             for (var i = 0; i < features.length; i++) {
-              if (features[i].properties.cluster) {
-                console.log('continue');
-              } else {
-                console.log('print');
-              }
+              cluster.push(features[i].properties.cluster)
+            };
+            function allAreUndefined(arr) {
+              return arr.every(element => element === undefined);
+            };
+            if (allAreUndefined(cluster)) {
+              var description = '';
+              console.log(features[0]);
+              for (var i = 0; i < features.length; i++) {
+                description += '<div class=nom><a href=' + features[i].properties.Permalien +' target="_blank">' + features[i].properties["Titre - FR"] + '</a></div><br>'
+              };
+              popup.setLngLat(features[0].geometry.coordinates).setHTML(description).addTo(map);
             }
           });
           map.getSource(clickedSource).getClusterExpansionZoom(
@@ -772,12 +832,12 @@ $(".rectangle").click(function(event)
 
       map.on('mouseenter', clickedLayer, (e) => {
         map.getCanvas().style.cursor = 'pointer';
-        map.on('click', clickedLayer, (e) => {
+        map.on('click', layers[layers.indexOf(e.features[0].layer.id)], (e) => {
           var features = map.queryRenderedFeatures(e.point, {
-            layers: [clickedLayer]
+            layers: [layers[layers.indexOf(e.features[0].layer.id)]]
           });
           var clusterId = features[0].properties.cluster_id;
-          map.getSource(clickedSource).getClusterExpansionZoom(
+          map.getSource(layers[layers.indexOf(e.features[0].layer.id)].replace('-layer', '')).getClusterExpansionZoom(
             clusterId,
             function (err, zoom) {
               if (err) return;
@@ -793,7 +853,6 @@ $(".rectangle").click(function(event)
       map.on('mouseenter', clickedLayerUnclustered, (e) => {
         map.getCanvas().style.cursor = 'pointer';
         map.on('click', layers[layers.indexOf(e.features[0].layer.id)], (e) => {
-
           map.easeTo({
             center: e.features[0].geometry.coordinates,
           });
@@ -830,17 +889,22 @@ $(".rectangle").click(function(event)
 const autoCompleteJS = new autoComplete(
   {
     placeHolder: "Rechercher un batiment...",
-    data: {
+    data:
+    {
       src: async (query) => {
         try {
-          // Fetch Data from external Source
-          const source = await fetch('https://raw.githubusercontent.com/TmMnt/AMS/main/RM_bati_beaulieu_labels.geojson');
-          // Data is array of `Objects` | `Strings`
-          const pre_data = await source.json();
+          var bat = await fetch('https://raw.githubusercontent.com/esigat/Rennes_1_DIL/main/Webmap/data/RM_bati_beaulieu_labels.geojson');
+          var usage = await fetch('https://raw.githubusercontent.com/esigat/Rennes_1_DIL/main/Webmap/data/bati_beaulieu_usages.geojson');
+          var pre_data_bat = await bat.json();
+          var pre_data_usage = await usage.json();
           data = [];
-          for (var i = 0; i < pre_data.features.length; i++) {
-            data.push('Batiment ' + pre_data.features[i].properties.batiment);
-          }
+          for (var i = 0; i < pre_data_bat.features.length; i++) {
+            data.push('Batiment ' + pre_data_bat.features[i].properties.batiment);
+          };
+          for (var i = 0; i < pre_data_usage.features.length; i++) {
+            data.push(pre_data_usage.features[i].properties.batiment_u);
+          };
+          console.log(data);
           return data;
         } catch (error) {
           return error;
@@ -874,7 +938,7 @@ const autoCompleteJS = new autoComplete(
           const message = document.createElement("div");
           message.setAttribute("class", "no_result");
           // Add message text content
-          message.innerHTML = `<span>Pas de résultat(s) pour "${data.query}" :(</span>`;
+          message.innerHTML = `<span>Pas de résultat pour "${data.query}" :(</span>`;
             // Add message list element to the list
             list.appendChild(message);
           }
@@ -887,26 +951,55 @@ const autoCompleteJS = new autoComplete(
 
   autoCompleteJS.input.addEventListener("selection", function (event) {
     const feedback = event.detail;
+    console.log(feedback);
     autoCompleteJS.input.blur();
-    // Prepare User's Selected Value
-    const selection = feedback.selection.value;
+    var selection = feedback.selection.value;
     // Render selected choice to selection div
     // Replace Input value with the selected value
     autoCompleteJS.input.value = selection;
     // Console log autoComplete data feedback
-    source = map.querySourceFeatures('batiments-labels-layer');
-    let filteredFeatures = source.filter(function (feature) {
-      return 'Batiment ' + feature.properties.batiment == selection;
-    });
-    map.easeTo({
-      center: filteredFeatures[0].geometry.coordinates,
-      zoom:17
-    });
-    var description =
-    '<div class="nom">' + 'Bâtiment ' + filteredFeatures[0].properties.batiment + '</div>' +
-    '<div class="message">' +  filteredFeatures[0].properties.batiment_u + '</div>' +
-    '<a href=https://www.star.fr/ target=_blank>Lien vers le UFR</a>'
-    popup_bat.setLngLat(filteredFeatures[0].geometry.coordinates).setHTML(description).addTo(map);
+    if(selection.startsWith('Batiment')) {
+      $.ajax({
+        url:'https://raw.githubusercontent.com/esigat/Rennes_1_DIL/main/Webmap/data/RM_bati_beaulieu_labels.geojson',
+        async:false,
+        dataType: 'json',
+        success: function(response) {
+          source = response.features;
+          let filteredFeatures = source.filter(function (feature) {
+            return 'Batiment ' + feature.properties.batiment == selection;
+          });
+          map.easeTo({
+            center: filteredFeatures[0].geometry.coordinates,
+            zoom:17
+          });
+          var description =
+          '<div class="nom">' + 'Bâtiment ' + filteredFeatures[0].properties.batiment + '</div>' +
+          '<div class="message">' +  filteredFeatures[0].properties.batiment_u + '</div>'
+          popup_bat.setLngLat(filteredFeatures[0].geometry.coordinates).setHTML(description).addTo(map);
+        }
+      });
+    } else {
+      $.ajax({
+        url:'https://raw.githubusercontent.com/esigat/Rennes_1_DIL/main/Webmap/data/bati_beaulieu_usages.geojson',
+        async:false,
+        dataType: 'json',
+        success: function(response) {
+          source = response.features;
+          let filteredFeatures = source.filter(function (feature) {
+            return feature.properties.batiment_u == selection;
+          });
+          map.easeTo({
+            center: filteredFeatures[0].geometry.coordinates,
+            zoom:17
+          });
+          var description =
+          '<div class="nom">' + filteredFeatures[0].properties.batiment_u + '</div>' +
+          '<div class="message">' + 'Bâtiment(s) ' + filteredFeatures[0].properties.batiment + '</div>'
+          popup_bat.setLngLat(filteredFeatures[0].geometry.coordinates).setHTML(description).addTo(map);
+        }
+      });
+    }
+
   });
 
 //TEST
