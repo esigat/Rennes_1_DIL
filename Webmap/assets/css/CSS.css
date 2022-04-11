@@ -27,7 +27,7 @@ body {
   display: none;
 }
 
-.maplibregl-popup-tip,.mapboxgl-popup-tip {
+.poi .maplibregl-popup-tip {
   display: none;
 }
 
@@ -35,7 +35,7 @@ body {
   color: #332823;
   font-family: 'Open Sans', sans-serif;
   border-radius: 10px;
-  max-height: 240px;
+  max-height: calc(50vh - 6rem);
   overflow-y:auto;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, .8);
   border-left: 2px solid #332823;
@@ -65,6 +65,12 @@ body {
   margin-bottom: 0.2em;
   font-size: 1rem;
 }
+.maplibregl-popup-content .nom a:link {
+  margin: 0;
+  margin-bottom: 0.2em;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
 .maplibregl-popup-content a:link {
   margin: 0;
   margin-bottom: 0.2em;
@@ -74,7 +80,6 @@ body {
 .maplibregl-popup-content a:hover {
   margin: 0;
   margin-bottom: 0.2em;
-  font-size: 0.85rem;
   text-decoration: underline;
 }
 
@@ -233,7 +238,7 @@ body {
   display: block;
   position: absolute;
   top:5rem;
-  bottom: 4rem;
+  bottom: 2rem;
   left: 1rem;
   height: auto;
   width: calc(100% - 6rem);
