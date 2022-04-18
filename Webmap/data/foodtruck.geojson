@@ -1,9 +1,8 @@
 {
 "type": "FeatureCollection",
-"name": "foodtruck2",
+"name": "foodtruck",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "id": 2, "jour_1": "Lundi", "jour_2": "Mercredi", "jour_3": "Vendredi", "source": "test", "info1": "Foodtruck du bâtiment 28", "info2": "Ouvert le lundi, mercredi et vendredi", "URL": "https://www.creer-mon-business-plan.fr/business-plan/food-trucks/se-lancer" }, "geometry": { "type": "Point", "coordinates": [ -1.639452112281722, 48.12015941657198 ] } },
-{ "type": "Feature", "properties": { "id": 1, "jour_1": "Mardi", "jour_2": "Mercredi", "jour_3": "Jeudi", "source": "PDF", "info1": "Chicatana | Man'D Pizza", "info2": "Présents en alternance le mardi, le mercredi et le jeudi", "URL": "https://etudiant.univ-rennes1.fr/des-food-trucks-sur-les-campus-de-beaulieu-et-villejean" }, "geometry": { "type": "Point", "coordinates": [ -1.637048368531316, 48.116330927438071 ] } }
+{ "type": "Feature", "properties": { "id": 1, "jour_1": "Mardi", "jour_2": "Mercredi", "jour_3": "Jeudi", "source": "PDF", "info1": "Chicatana | Man'D Pizza", "info2": "Présents en alternance le mardi, le mercredi et le jeudi", "URL": "https:\/\/etudiant.univ-rennes1.fr\/des-food-trucks-sur-les-campus-de-beaulieu-et-villejean" }, "geometry": { "type": "Point", "coordinates": [ -1.637048368531316, 48.116330927438071 ] } }
 ]
 }
